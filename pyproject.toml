@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lopace"
-version = "0.1.0"
+version = "0.1.1"
 description = "Lossless Optimized Prompt Accurate Compression Engine"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -32,6 +32,6 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/amanulla/lopace"
-Repository = "https://github.com/amanulla/lopace"
-Issues = "https://github.com/amanulla/lopace/issues"
+Homepage = "https://github.com/connectaman/LoPace"
+Repository = "https://github.com/connectaman/LoPace"
+Issues = "https://github.com/connectaman/LoPace/issues"
