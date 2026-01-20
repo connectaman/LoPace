@@ -36,5 +36,7 @@ setup(
     project_urls={
         "Bug Reports": "https://github.com/connectaman/LoPace/issues",
         "Source": "https://github.com/connectaman/LoPace",
+        "PyPI": "https://pypi.org/project/lopace/",
+        "Hugging Face Spaces": "https://huggingface.co/spaces/codewithaman/LoPace",
     },
 )

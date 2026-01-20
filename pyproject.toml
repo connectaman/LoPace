@@ -35,3 +35,5 @@ dependencies = [
 Homepage = "https://github.com/connectaman/LoPace"
 Repository = "https://github.com/connectaman/LoPace"
 Issues = "https://github.com/connectaman/LoPace/issues"
+"PyPI" = "https://pypi.org/project/lopace/"
+"Hugging Face Spaces" = "https://huggingface.co/spaces/codewithaman/LoPace"

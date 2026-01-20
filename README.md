@@ -1,11 +1,17 @@
 # LoPace
 
+<div align="center">
+  <img src="screenshots/logo-text.png" alt="LoPace Logo" width="600"/>
+</div>
+
 **Lossless Optimized Prompt Accurate Compression Engine**
 
 A professional, open-source Python package for compressing and decompressing prompts using multiple techniques: Zstd, Token-based (BPE), and Hybrid methods. Achieve up to 80% space reduction while maintaining perfect lossless reconstruction.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![PyPI version](https://badge.fury.io/py/lopace.svg)](https://pypi.org/project/lopace/)
+[![🤗 Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/codewithaman/LoPace)
 
 ## The Problem: Storage Challenges with Large Prompts
 
