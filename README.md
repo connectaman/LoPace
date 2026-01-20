@@ -285,6 +285,7 @@ Comprehensive benchmarks were conducted on 10 diverse prompts across three size 
 ### Speed & Throughput Metrics
 
 ![Speed Metrics](screenshots/speed_metrics.svg)
+![Speed Metrics](screenshots/original_vs_decompressed.svg)
 
 **Key Insights:**
 - **Compression speeds range from 50-200 MB/s** depending on method and prompt size
