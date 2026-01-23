@@ -12,6 +12,14 @@ A professional, open-source Python package for compressing and decompressing pro
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyPI version](https://badge.fury.io/py/lopace.svg)](https://pypi.org/project/lopace/)
 [![🤗 Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/codewithaman/LoPace)
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](paper/lopace-preprint-arxiv.pdf)
+
+<div align="center">
+  <a href="paper/lopace-preprint-arxiv.pdf">
+    <img src="paper/lopace-preprint-arxiv-01.png" alt="LoPace Research Paper - First Page" width="600" style="cursor: pointer; border: 1px solid #ddd; border-radius: 4px;">
+  </a>
+  <p><em>Click the image above to view the full research paper (PDF)</em></p>
+</div>
 
 ## The Problem: Storage Challenges with Large Prompts
 
