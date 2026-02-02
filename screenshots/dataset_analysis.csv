@@ -1,0 +1,387 @@
+id,title,url,char_count,word_count,line_count,content_type,code_blocks,links,images,headers
+1,🤗 Transformers,https://huggingface.co/docs/transformers/v4.34.0/en/index,77145,9907,483,Markdown,0,469,1,5
+2,Quick tour,https://huggingface.co/docs/transformers/v4.34.0/en/quicktour,26670,2817,456,Code,88,86,0,11
+3,Installation,https://huggingface.co/docs/transformers/v4.34.0/en/installation,9412,1040,203,Code,38,19,1,8
+4,Pipelines for inference,https://huggingface.co/docs/transformers/v4.34.0/en/pipeline_tutorial,14792,1750,259,Code,38,34,1,12
+5,Load pretrained instances with an AutoClass,https://huggingface.co/docs/transformers/v4.34.0/en/autoclass_tutorial,6503,767,113,Code,18,14,0,6
+6,Preprocess,https://huggingface.co/docs/transformers/v4.34.0/en/preprocessing,23566,3099,444,Code,64,38,2,9
+7,Fine-tune a pretrained model,https://huggingface.co/docs/transformers/v4.34.0/en/training,5227,695,83,Code,12,8,0,4
+8,Train with a script,https://huggingface.co/docs/transformers/v4.34.0/en/run_scripts,15117,1507,307,Code,30,51,0,10
+9,Distributed training with 🤗 Accelerate,https://huggingface.co/docs/transformers/v4.34.0/en/accelerate,4461,481,112,Code,12,7,0,7
+10,Load adapters with 🤗 PEFT,https://huggingface.co/docs/transformers/v4.34.0/en/peft,6814,772,180,Code,26,14,1,8
+11,Share a model,https://huggingface.co/docs/transformers/v4.34.0/en/model_sharing,9481,1175,191,Code,34,22,3,8
+12,Transformers Agents,https://huggingface.co/docs/transformers/v4.34.0/en/transformers_agents,13475,1939,247,Code,34,30,7,12
+13,Generation with LLMs,https://huggingface.co/docs/transformers/v4.34.0/en/llm_tutorial,10223,1230,175,Code,16,24,0,11
+14,Use tokenizers from 🤗 Tokenizers,https://huggingface.co/docs/transformers/v4.34.0/en/fast_tokenizers,2368,275,51,Code,8,6,0,3
+15,Multilingual models for inference,https://huggingface.co/docs/transformers/v4.34.0/en/multilingual,7252,865,160,Code,22,2,0,8
+16,Create a custom architecture,https://huggingface.co/docs/transformers/v4.34.0/en/create_a_model,17486,1814,342,Code,50,40,0,8
+17,Templates for Chat Models,https://huggingface.co/docs/transformers/v4.34.0/en/chat_templating,13608,1964,181,Code,22,11,0,7
+18,Sharing custom models,https://huggingface.co/docs/transformers/v4.34.0/en/custom_models,15022,1842,274,Code,32,17,0,6
+19,Run training on Amazon SageMaker,https://huggingface.co/docs/transformers/v4.34.0/en/sagemaker,319,37,13,Markdown,0,1,1,1
+20,Export to TFLite,https://huggingface.co/docs/transformers/v4.34.0/en/tflite,2308,311,38,Code,8,3,0,1
+21,Export to ONNX,https://huggingface.co/docs/transformers/v4.34.0/en/serialization,8966,1097,160,Code,28,15,0,5
+22,Export to TorchScript,https://huggingface.co/docs/transformers/v4.34.0/en/torchscript,8378,1013,150,Code,12,16,0,11
+23,Benchmarks,https://huggingface.co/docs/transformers/v4.34.0/en/benchmarks,16861,1566,314,Code,16,6,0,4
+24,🤗 Transformers Notebooks,https://huggingface.co/docs/transformers/v4.34.0/en/notebooks,169,18,11,Text,0,0,0,1
+25,Custom Tools and Prompts,https://huggingface.co/docs/transformers/v4.34.0/en/custom_tools,30095,4391,655,Code,110,19,4,13
+26,Community,https://huggingface.co/docs/transformers/v4.34.0/en/community,24667,1221,3,Markdown,0,153,51,1
+27,Troubleshoot,https://huggingface.co/docs/transformers/v4.34.0/en/troubleshooting,8542,1080,161,Code,28,17,0,8
+28,Performance and Scalability,https://huggingface.co/docs/transformers/v4.34.0/en/performance,3431,503,52,Markdown,0,13,0,5
+29,Methods and tools for efficient training on a single GPU,https://huggingface.co/docs/transformers/v4.34.0/en/perf_train_gpu_one,32711,3945,391,Code,28,89,1,20
+30,Efficient Training on Multiple GPUs,https://huggingface.co/docs/transformers/v4.34.0/en/perf_train_gpu_many,33268,4874,513,Code,10,61,10,13
+31,Efficient Training on CPU,https://huggingface.co/docs/transformers/v4.34.0/en/perf_train_cpu,2827,367,56,Code,4,4,0,5
+32,Efficient Training on Multiple CPUs,https://huggingface.co/docs/transformers/v4.34.0/en/perf_train_cpu_many,5036,657,119,Code,12,7,0,6
+33,Training on TPUs,https://huggingface.co/docs/transformers/v4.34.0/en/perf_train_tpu,696,94,17,Markdown,0,3,1,1
+34,Training on TPU with TensorFlow,https://huggingface.co/docs/transformers/v4.34.0/en/perf_train_tpu_tf,12738,2042,119,Code,8,9,0,11
+35,Training on Specialized Hardware,https://huggingface.co/docs/transformers/v4.34.0/en/perf_train_special,728,96,17,Markdown,0,3,1,1
+36,Custom hardware for training,https://huggingface.co/docs/transformers/v4.34.0/en/perf_hardware,6677,1014,123,Code,8,4,0,5
+37,Hyperparameter Search using Trainer API,https://huggingface.co/docs/transformers/v4.34.0/en/hpo_train,5481,496,124,Code,18,14,0,4
+38,Efficient Inference on CPU,https://huggingface.co/docs/transformers/v4.34.0/en/perf_infer_cpu,3654,444,62,Code,4,5,0,6
+39,Efficient Inference on a Single GPU,https://huggingface.co/docs/transformers/v4.34.0/en/perf_infer_gpu_one,18152,2048,374,Code,36,34,8,23
+40,Inference on Specialized Hardware,https://huggingface.co/docs/transformers/v4.34.0/en/perf_infer_special,501,64,15,Markdown,0,2,1,1
+41,Efficient Inference on a Multiple GPUs,https://huggingface.co/docs/transformers/v4.34.0/en/perf_infer_gpu_many,4971,503,100,Code,10,10,0,7
+42,Instantiating a big model,https://huggingface.co/docs/transformers/v4.34.0/en/big_models,5604,723,102,Code,16,5,0,3
+43,Debugging,https://huggingface.co/docs/transformers/v4.34.0/en/debugging,12697,1593,277,Code,30,3,0,4
+44,XLA Integration for TensorFlow Models,https://huggingface.co/docs/transformers/v4.34.0/en/tf_xla,8345,998,156,Code,18,15,0,5
+45,Optimize inference using torch.compile(),https://huggingface.co/docs/transformers/v4.34.0/en/perf_torch_compile,14673,2018,352,Code,8,19,4,22
+46,Contribute to 🤗 Transformers,https://huggingface.co/docs/transformers/v4.34.0/en/contributing,17738,2553,290,Code,30,29,0,14
+47,How to convert a 🤗 Transformers model to TensorFlow?,https://huggingface.co/docs/transformers/v4.34.0/en/add_tensorflow_model,21014,3032,220,Code,16,23,0,8
+48,How to add a model to 🤗 Transformers?,https://huggingface.co/docs/transformers/v4.34.0/en/add_new_model,51728,7503,576,Code,56,42,1,11
+49,How to create a custom pipeline?,https://huggingface.co/docs/transformers/v4.34.0/en/add_new_pipeline,10047,1272,205,Code,20,1,0,4
+50,Checks on a Pull Request,https://huggingface.co/docs/transformers/v4.34.0/en/pr_checks,9773,1465,121,Code,10,6,0,6
+51,Testing,https://huggingface.co/docs/transformers/v4.34.0/en/testing,40467,5631,1069,Code,174,29,0,42
+52,Philosophy,https://huggingface.co/docs/transformers/v4.34.0/en/philosophy,129,13,9,Text,0,0,0,1
+53,What 🤗 Transformers can do,https://huggingface.co/docs/transformers/v4.34.0/en/task_summary,21437,2967,325,Code,28,6,0,18
+54,Glossary,https://huggingface.co/docs/transformers/v4.34.0/en/glossary,24752,3463,394,Code,30,49,0,63
+55,How 🤗 Transformers solve tasks,https://huggingface.co/docs/transformers/v4.34.0/en/tasks_explained,27888,4095,242,Markdown,0,60,9,18
+56,Padding and truncation,https://huggingface.co/docs/transformers/v4.34.0/en/pad_truncation,4968,718,45,Markdown,0,0,0,1
+57,Summary of the tokenizers,https://huggingface.co/docs/transformers/v4.34.0/en/tokenizer_summary,16946,2519,141,Code,20,34,0,8
+58,Attention mechanisms,https://huggingface.co/docs/transformers/v4.34.0/en/attention,2785,461,23,Markdown,0,4,1,5
+59,BERTology,https://huggingface.co/docs/transformers/v4.34.0/en/bertology,1798,203,16,Markdown,0,7,0,1
+60,Using pipelines for a webserver,https://huggingface.co/docs/transformers/v4.34.0/en/pipeline_webserver,6093,957,112,Code,6,2,0,6
+61,Model training anatomy,https://huggingface.co/docs/transformers/v4.34.0/en/model_memory_anatomy,10960,1482,213,Code,20,6,0,5
+62,Perplexity of fixed-length models,https://huggingface.co/docs/transformers/v4.34.0/en/perplexity,7042,972,93,Code,6,6,3,3
+63,The Transformer model family,https://huggingface.co/docs/transformers/v4.34.0/en/model_summary,14451,2067,75,Markdown,0,41,0,18
+64,Agents & Tools,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/agent,26870,3543,443,Code,14,44,0,36
+65,Callbacks,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/callback,28479,2803,440,Code,8,101,0,30
+66,Configuration,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/configuration,28627,3574,351,Code,4,39,0,16
+67,Data Collator,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/data_collator,17589,2014,259,Markdown,0,34,0,25
+68,Keras callbacks,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/keras_callbacks,6737,840,81,Code,6,3,0,3
+69,Logging,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/logging,6674,610,183,Code,10,17,0,16
+70,Generation,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/text_generation,39556,3184,711,Code,20,79,0,22
+71,Auto Classes,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/auto,183520,14266,3230,Code,192,620,0,179
+72,Models,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/model,47897,5263,1037,Code,34,88,0,68
+73,Exporting 🤗 Transformers models to ONNX,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/onnx,8073,785,201,Markdown,0,21,0,24
+74,Optimization,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/optimizer_schedules,16705,1833,316,Code,8,29,4,26
+75,Processors,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/processors,16640,1689,309,Code,10,39,0,22
+76,Quantize 🤗 Transformers models,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/quantization,29034,3767,471,Code,50,24,0,35
+77,Model outputs,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/output,50778,4103,799,Code,2,67,0,127
+78,Pipelines,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/pipelines,84412,8637,1779,Code,94,185,0,112
+79,Tokenizer,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/tokenizer,45229,5153,688,Code,4,69,0,40
+80,Feature Extractor,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/feature_extractor,11031,1262,198,Code,2,12,0,9
+81,DeepSpeed Integration,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/deepspeed,89335,11237,1959,Code,160,111,0,55
+82,Image Processor,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/image_processor,7180,621,133,Code,2,17,0,14
+83,Custom Layers and Utilities,https://huggingface.co/docs/transformers/v4.34.0/en/internal/modeling_utils,17458,1734,418,Code,2,38,0,34
+84,Trainer,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/trainer,90214,10127,1364,Code,74,141,0,62
+85,Utilities for pipelines,https://huggingface.co/docs/transformers/v4.34.0/en/internal/pipelines_utils,7800,798,207,Markdown,0,20,0,18
+86,Utilities for Tokenizers,https://huggingface.co/docs/transformers/v4.34.0/en/internal/tokenization_utils,90273,11042,970,Code,8,106,0,30
+87,Utilities for `FeatureExtractors`,https://huggingface.co/docs/transformers/v4.34.0/en/internal/audio_utils,16365,2326,208,Markdown,0,8,0,10
+88,Utilities for Image Processors,https://huggingface.co/docs/transformers/v4.34.0/en/internal/image_processing_utils,23724,2644,395,Code,4,32,0,25
+89,Utilities for Trainer,https://huggingface.co/docs/transformers/v4.34.0/en/internal/trainer_utils,12974,1706,305,Code,10,13,0,18
+90,General Utilities,https://huggingface.co/docs/transformers/v4.34.0/en/internal/file_utils,3323,309,87,Markdown,0,12,0,15
+91,Time Series Utilities,https://huggingface.co/docs/transformers/v4.34.0/en/internal/time_series_utils,1012,103,31,Markdown,0,3,0,5
+92,Utilities for Generation,https://huggingface.co/docs/transformers/v4.34.0/en/internal/generation_utils,135682,12492,2422,Code,32,320,0,177
+93,ALIGN,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/align,45847,4783,545,Code,16,106,0,24
+94,AltCLIP,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/altclip,39836,3948,509,Code,18,91,0,23
+95,ALBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/albert,101803,10155,1468,Code,60,246,2,81
+96,Audio Spectrogram Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/audio-spectrogram-transformer,24238,2552,271,Code,6,46,1,12
+97,Autoformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/autoformer,13175,1164,168,Code,6,25,0,11
+98,Bark,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bark,30146,2871,458,Code,24,90,0,38
+99,BARThez,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/barthez,12973,1559,172,Markdown,0,24,0,12
+100,BARTpho,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bartpho,9772,1153,150,Code,4,13,0,7
+101,BART,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bart,86598,7808,1189,Code,56,211,2,63
+102,BEiT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/beit,36717,3338,497,Code,16,105,1,32
+103,BertGeneration,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bert-generation,32589,3383,360,Code,10,57,0,13
+104,BERTweet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bertweet,4791,536,105,Code,2,9,0,7
+105,BERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bert,126707,12193,1786,Code,74,327,2,104
+106,BigBirdPegasus,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bigbird_pegasus,24299,2108,314,Code,14,49,0,20
+107,BigBird,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/big_bird,159390,16324,1979,Code,42,344,0,66
+108,BioGPT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/biogpt,47638,5100,529,Code,12,73,0,20
+109,Big Transfer (BiT),https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bit,10537,1054,160,Code,6,28,0,13
+110,Blenderbot Small,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/blenderbot-small,45833,4128,635,Code,26,97,0,39
+111,Blenderbot,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/blenderbot,43613,4058,614,Code,30,91,0,38
+112,BLIP,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/blip,49460,4776,754,Code,30,115,1,53
+113,BLIP-2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/blip-2,28923,2653,456,Code,20,66,1,27
+114,BridgeTower,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bridgetower,66793,6885,729,Code,20,119,1,28
+115,BLOOM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bloom,31956,2973,471,Code,18,90,0,28
+116,BORT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bort,2590,373,29,Markdown,0,6,0,2
+117,BROS,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bros,21793,2048,290,Code,14,43,0,19
+118,ByT5,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/byt5,10090,1312,183,Code,6,13,0,8
+119,Chinese-CLIP,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/chinese_clip,56035,5658,649,Code,18,109,0,27
+120,CANINE,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/canine,57041,5957,743,Code,22,113,0,28
+121,CamemBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/camembert,162907,17942,1913,Code,40,303,0,57
+122,CLAP,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/clap,54829,5855,638,Code,18,107,0,28
+123,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/llama_code,219,25,1,Markdown,0,1,0,0
+124,CodeGen,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/codegen,30531,3354,391,Code,12,53,0,19
+125,CLIP,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/clip,122303,12582,1575,Code,44,261,0,69
+126,CLIPSeg,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/clipseg,23130,2068,366,Code,18,65,1,25
+127,Conditional DETR,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/conditional_detr,25418,2235,335,Code,8,49,1,22
+128,ConvBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/convbert,59417,6057,892,Code,40,125,2,51
+129,ConvNeXT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/convnext,19061,1992,272,Code,10,44,1,18
+130,CPMAnt,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/cpmant,21626,2255,265,Code,6,43,0,14
+131,ConvNeXt V2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/convnextv2,16013,1644,197,Code,6,36,1,11
+132,CPM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/cpm,7399,890,135,Code,4,14,0,11
+133,CTRL,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/ctrl,32343,3387,458,Code,22,71,2,26
+134,Convolutional Vision Transformer (CvT),https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/cvt,29333,3215,348,Code,10,61,0,17
+135,DeBERTa,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/deberta,60711,6187,882,Code,40,147,0,50
+136,Data2Vec,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/data2vec,79421,7232,1135,Code,44,194,0,63
+137,DeBERTa-v2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/deberta-v2,64901,6866,948,Code,40,138,0,57
+138,Decision Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/decision_transformer,8329,747,119,Code,4,16,0,10
+139,Deformable DETR,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/deformable_detr,17461,1583,216,Code,6,36,1,16
+140,DeiT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/deit,32254,3070,480,Code,18,76,0,32
+141,DePlot,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/deplot,3472,403,45,Code,4,3,0,5
+142,DETA,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/deta,15627,1460,199,Code,6,32,1,15
+143,DialoGPT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/dialogpt,2357,331,23,Markdown,0,4,0,2
+144,DETR,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/detr,39726,3887,431,Code,14,85,0,27
+145,Dilated Neighborhood Attention Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/dinat,11224,1164,158,Code,6,30,1,11
+146,DINOv2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/dinov2,9468,937,137,Code,6,25,0,10
+147,Donut,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/donut,32259,3337,416,Code,10,49,1,17
+148,DistilBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/distilbert,89238,8505,1251,Code,52,253,3,66
+149,DPR,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/dpr,33940,3229,461,Code,16,92,2,38
+150,,https://huggingface.co/docs/transformers/v4.34.0/en/master/model_doc/dpt,218,25,1,Markdown,0,1,0,0
+151,DiT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/dit,4391,478,55,Code,6,16,1,3
+152,EfficientFormer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/efficientformer,50355,5125,552,Code,14,80,0,26
+153,EfficientNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/efficientnet,24071,2712,261,Code,6,30,0,13
+154,EnCodec,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/encodec,19096,2214,223,Code,6,26,0,10
+155,ELECTRA,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/electra,107670,10638,1525,Code,62,251,2,86
+156,Encoder Decoder Models,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/encoder-decoder,31030,2894,434,Code,24,68,0,22
+157,ERNIE,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/ernie,33291,2981,452,Code,16,93,0,36
+158,ErnieM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/ernie_m,27708,2609,408,Code,12,63,0,27
+159,FLAN-UL2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/flan-ul2,2398,341,35,Code,2,4,0,4
+160,Falcon,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/falcon,54311,5740,617,Code,12,92,0,20
+161,FLAN-T5,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/flan-t5,1701,163,38,Code,2,9,0,2
+162,ESM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/esm,40856,4025,608,Code,28,97,0,39
+163,FocalNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/focalnet,24189,2590,299,Code,8,40,0,13
+164,FLAVA,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/flava,32311,2740,432,Code,16,82,0,40
+165,FNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/fnet,34326,3298,577,Code,24,87,0,39
+166,FlauBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/flaubert,63326,6420,870,Code,36,126,2,49
+167,Funnel Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/funnel,80400,8382,1141,Code,46,181,2,66
+168,GIT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/git,20932,2006,349,Code,14,52,1,18
+169,GLPN,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/glpn,11878,1203,183,Code,6,30,1,14
+170,OpenAI GPT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/openai-gpt,94136,10181,1098,Code,24,201,2,37
+171,GPT Neo,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gpt_neo,73177,7596,878,Code,20,144,0,27
+172,GPT-NeoX,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gpt_neox,53561,5537,653,Code,20,90,0,23
+173,GPT-NeoX-Japanese,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gpt_neox_japanese,12469,1116,186,Code,10,32,0,14
+174,OpenAI GPT2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gpt2,159842,17413,1817,Code,38,288,2,56
+175,GPT-Sw3,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gpt-sw3,6120,694,89,Code,4,12,0,6
+176,GPTBigCode,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gpt_bigcode,43418,4734,450,Code,6,77,0,17
+177,Graphormer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/graphormer,11304,1416,110,Markdown,0,13,0,10
+178,GPT-J,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gptj,51965,5259,718,Code,34,123,0,36
+179,GPTSAN-japanese,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gptsan-japanese,17403,1911,274,Code,16,22,0,17
+180,GroupViT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/groupvit,28257,2647,456,Code,24,68,0,30
+181,HerBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/herbert,9906,1136,186,Code,6,17,0,12
+182,IDEFICS,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/idefics,34498,3721,391,Code,10,54,0,16
+183,I-BERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/ibert,25492,2333,371,Code,14,62,0,23
+184,Hubert,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/hubert,24846,2524,366,Code,12,55,0,20
+185,ImageGPT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/imagegpt,21205,2119,253,Code,8,45,1,18
+186,Informer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/informer,48939,5779,480,Code,6,34,0,11
+187,Jukebox,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/jukebox,40700,5185,489,Code,10,48,1,28
+188,LayoutLMV2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/layoutlmv2,93349,10219,1009,Code,30,170,0,32
+189,LayoutLM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/layoutlm,119910,13316,1460,Code,30,226,0,44
+190,LayoutLMv3,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/layoutlmv3,135242,15082,1348,Code,18,239,1,43
+191,LayoutXLM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/layoutxlm,36854,4257,366,Code,4,62,0,15
+192,InstructBLIP,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/instructblip,20686,1837,267,Code,8,51,1,20
+193,LED,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/led,46456,4381,617,Code,22,87,0,41
+194,LLaMA,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/llama,41856,4509,507,Code,12,96,0,26
+195,Llama2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/llama2,45255,5013,520,Code,12,101,0,26
+196,Longformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/longformer,213379,24809,2180,Code,42,285,2,66
+197,LeViT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/levit,17437,1685,221,Code,8,47,1,17
+198,LiLT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/lilt,40660,4107,474,Code,12,98,1,17
+199,LongT5,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/longt5,85458,8840,903,Code,20,149,0,24
+200,M-CTC-T,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mctct,33065,3527,380,Code,6,68,0,16
+201,LXMERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/lxmert,92700,10321,835,Code,10,131,0,35
+202,M2M100,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/m2m_100,42875,4586,483,Code,12,64,0,18
+203,MarianMT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/marian,103399,11056,1142,Code,26,178,2,33
+204,LUKE,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/luke,47070,4297,637,Code,24,94,0,36
+205,MarkupLM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/markuplm,85440,9487,924,Code,24,145,1,34
+206,MatCha,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/matcha,4044,459,54,Code,4,3,0,5
+207,Mask2Former,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mask2former,23354,1801,312,Code,10,49,1,20
+208,MEGA,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mega,73730,7803,826,Code,18,130,0,25
+209,MegatronBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/megatron-bert,93021,9476,1100,Code,30,182,0,32
+210,MaskFormer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/maskformer,25972,2016,310,Code,8,54,1,22
+211,MBart and MBart-50,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mbart,80808,7245,1245,Code,64,170,2,69
+212,MegatronGPT2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/megatron_gpt2,3546,458,32,Code,4,6,0,2
+213,MGP-STR,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mgp-str,15795,1509,219,Code,6,48,1,18
+214,Mistral,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mistral,32695,3443,398,Code,14,68,1,20
+215,MMS,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mms,14869,1642,332,Code,42,26,0,10
+216,mLUKE,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mluke,21089,2595,188,Code,4,28,0,6
+217,MobileNet V1,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mobilenet_v1,29258,3203,318,Code,6,40,0,15
+218,MobileBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mobilebert,174335,19036,2103,Code,48,334,0,65
+219,MobileNet V2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mobilenet_v2,39747,4298,434,Code,8,62,0,19
+220,MobileViT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mobilevit,55096,5951,658,Code,16,99,0,28
+221,MobileViTV2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mobilevitv2,11429,1125,181,Code,8,28,0,11
+222,MRA,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mra,53260,5434,684,Code,16,113,0,22
+223,MusicGen,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/musicgen,55116,5797,633,Code,22,88,0,24
+224,mT5,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mt5,91854,9872,1192,Code,36,164,2,45
+225,MPT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mpt,19879,1888,304,Code,12,49,0,19
+226,MVP,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mvp,80481,8846,944,Code,28,120,0,29
+227,MPNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/mpnet,57476,5924,862,Code,36,121,0,50
+228,Neighborhood Attention Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/nat,10261,1041,158,Code,6,29,1,11
+229,Nezha,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/nezha,74157,7665,917,Code,20,150,0,29
+230,NLLB,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/nllb,17580,2163,281,Code,14,23,0,13
+231,Nougat,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/nougat,29601,3254,317,Code,4,49,1,17
+232,NLLB-MOE,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/nllb-moe,41854,4626,449,Code,10,47,0,21
+233,Nyströmformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/nystromformer,57435,5749,711,Code,16,117,0,23
+234,OneFormer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/oneformer,27344,2217,312,Code,6,57,2,24
+235,,https://huggingface.co/docs/transformers/v4.34.0/en/master/model_doc/opt,218,25,1,Markdown,0,1,0,0
+236,Open-Llama,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/open-llama,10792,1003,135,Code,4,30,0,13
+237,PEGASUS-X,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/pegasus_x,33374,3521,312,Code,6,53,0,11
+238,Perceiver,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/perceiver,118700,12390,1314,Code,18,165,1,71
+239,OWL-ViT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/owlvit,30062,2788,463,Code,20,68,0,31
+240,Pegasus,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/pegasus,46193,4248,656,Code,28,106,2,43
+241,Persimmon,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/persimmon,13643,1335,167,Code,10,27,0,13
+242,PhoBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/phobert,4575,500,98,Code,2,9,0,7
+243,Pix2Struct,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/pix2struct,25828,2324,353,Code,14,61,0,24
+244,Pop2Piano,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/pop2piano,29187,2994,320,Code,10,46,1,16
+245,Pyramid Vision Transformer (PVT),https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/pvt,24193,2746,267,Code,6,34,0,13
+246,ProphetNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/prophetnet,33456,2779,398,Code,12,72,2,31
+247,PoolFormer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/poolformer,12335,1275,178,Code,6,29,1,14
+248,PLBart,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/plbart,22638,1993,328,Code,18,49,0,20
+249,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/realm.html,218,25,1,Markdown,0,1,0,0
+250,QDQBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/qdqbert,35660,3238,554,Code,26,84,0,32
+251,RAG,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/rag,56304,5006,653,Code,14,127,1,36
+252,RegNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/regnet,23415,2309,366,Code,14,64,0,21
+253,Reformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/reformer,32633,3246,426,Code,18,73,2,29
+254,RemBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/rembert,70599,7345,1014,Code,44,142,0,59
+255,ResNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/resnet,22602,2195,365,Code,14,64,1,22
+256,RoCBert,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/roc_bert,97648,9698,1090,Code,20,226,0,35
+257,RoFormer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/roformer,188988,20011,2322,Code,58,397,0,74
+258,RoBERTa,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/roberta,101912,9643,1413,Code,58,271,3,77
+259,RoBERTa-PreLayerNorm,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/roberta-prelayernorm,91470,8409,1221,Code,54,211,0,68
+260,RWKV,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/rwkv,13358,1487,232,Code,10,22,0,11
+261,SegFormer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/segformer,31030,3005,431,Code,14,84,1,31
+262,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/sew_d,209,25,1,Markdown,0,1,0,0
+263,SAM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/sam,23349,2176,309,Code,4,59,1,27
+264,SEW,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/sew,14317,1359,224,Code,8,37,0,14
+265,SpeechT5,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/speecht5,38908,3402,475,Code,12,85,0,34
+266,Speech2Text,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/speech_to_text,36391,3342,455,Code,14,81,0,28
+267,Speech2Text2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/speech_to_text_2,19740,1640,287,Code,8,59,0,18
+268,SwiftFormer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/swiftformer,15175,1552,189,Code,6,31,0,10
+269,Splinter,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/splinter,19125,1846,269,Code,6,46,0,23
+270,SqueezeBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/squeezebert,38783,3786,678,Code,44,81,0,33
+271,Swin Transformer V2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/swinv2,13517,1273,205,Code,8,35,0,14
+272,Swin Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/swin,22184,2087,350,Code,14,57,1,23
+273,Swin2SR,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/swin2sr,11459,1069,170,Code,6,29,1,14
+274,T5v1.1,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/t5v1.1,2314,241,45,Code,2,11,0,2
+275,SwitchTransformers,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/switch_transformers,51862,5518,526,Code,6,86,0,19
+276,T5,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/t5,71643,7151,971,Code,36,176,3,55
+277,Table Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/table-transformer,12852,1162,164,Code,6,31,1,11
+278,TAPEX,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/tapex,20920,2776,214,Code,6,22,0,7
+279,Time Series Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/time_series_transformer,4232,506,37,Markdown,0,0,0,1
+280,TAPAS,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/tapas,77997,8352,1097,Code,42,133,1,38
+281,TimeSformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/timesformer,20497,2131,305,Code,6,34,0,11
+282,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/trajectory_transformers,245,25,1,Markdown,0,1,0,0
+283,Transformer XL,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/transfo-xl,72865,8181,798,Code,18,117,2,34
+284,TrOCR,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/trocr,17155,1507,221,Code,6,51,1,13
+285,UL2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/ul2,2570,335,19,Markdown,0,5,0,2
+286,TVLT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/tvlt,19338,1844,250,Code,8,46,1,20
+287,Sample usage,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/umt5,24842,2281,311,Code,14,62,2,21
+288,UniSpeech,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/unispeech,18474,1673,263,Code,10,47,0,18
+289,UniSpeech-SAT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/unispeech-sat,65042,6695,648,Code,14,119,0,25
+290,UPerNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/upernet,7860,729,125,Code,8,25,1,9
+291,VAN,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/van,15979,1667,206,Code,6,37,1,11
+292,VideoMAE,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/videomae,18956,1825,323,Code,8,38,1,18
+293,ViLT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vilt,27646,2443,390,Code,12,56,1,29
+294,Vision Transformer (ViT),https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vit,39295,3909,519,Code,16,109,1,29
+295,Hybrid Vision Transformer (ViT Hybrid),https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vit_hybrid,12023,1081,162,Code,6,30,0,14
+296,VisualBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/visual_bert,30944,2669,444,Code,16,61,0,23
+297,ViTDet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vitdet,11548,1325,134,Code,4,21,0,7
+298,ViTMAE,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vit_mae,20254,2150,263,Code,10,49,1,17
+299,ViTMatte,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vitmatte,10081,928,133,Code,4,22,1,11
+300,ViTMSN,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vit_msn,10684,1009,148,Code,6,31,1,11
+301,VITS,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vits,34561,4159,385,Code,16,42,0,12
+302,Video Vision Transformer (ViViT),https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vivit,28354,3146,374,Code,6,34,0,13
+303,Wav2Vec2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/wav2vec2,79131,7018,1184,Code,32,193,0,63
+304,Wav2Vec2Phoneme,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/wav2vec2_phoneme,6339,561,77,Markdown,0,12,0,8
+305,Wav2Vec2-Conformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/wav2vec2-conformer,27847,2317,419,Code,14,66,0,24
+306,X-CLIP,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xclip,45267,4573,644,Code,14,94,1,23
+307,WavLM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/wavlm,23610,2239,342,Code,12,58,0,20
+308,Whisper,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/whisper,51175,4536,678,Code,22,128,0,48
+309,X-MOD,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xmod,56231,6121,628,Code,10,127,0,30
+310,XGLM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xglm,83021,9084,915,Code,14,150,0,33
+311,XLM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xlm,65706,6888,920,Code,38,136,2,52
+312,XLM-ProphetNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xlm-prophetnet,28834,2488,352,Code,10,65,2,25
+313,XLM-RoBERTa,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xlm-roberta,105984,9898,1417,Code,54,283,2,78
+314,XLM-V,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xlm-v,2149,273,18,Markdown,0,5,0,2
+315,XLS-R,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xls_r,2270,303,20,Markdown,0,5,0,2
+316,XLM-RoBERTa-XL,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xlm-roberta-xl,30331,2665,414,Code,18,72,0,26
+317,XLSR-Wav2Vec2,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xlsr_wav2vec2,2023,259,18,Markdown,0,4,0,2
+318,XLNet,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/xlnet,77030,7596,1106,Code,40,166,2,68
+319,YOSO,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/yoso,24125,2259,369,Code,16,57,1,23
+320,YOLOS,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/yolos,16443,1571,224,Code,6,35,1,17
+321,,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/callbacks,222,25,1,Markdown,0,1,0,0
+322,,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/image,214,25,1,Markdown,0,1,0,0
+323,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/visionencoderdecoder#transformers.VisionEncoderDecoderModel.forward.pixel_values,238,25,1,Markdown,0,1,0,0
+324,,https://huggingface.co/docs/transformers/v4.34.0/en/noteboks/README,207,25,1,Markdown,0,1,0,0
+325,,https://huggingface.co/docs/transformers/v4.34.0/en/quantization#bitsandbytes-integration,201,25,1,Markdown,0,1,0,0
+326,Text generation strategies,https://huggingface.co/docs/transformers/v4.34.0/en/generation_strategies,19819,2426,316,Code,26,17,0,13
+327,Causal language modeling,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/language_modeling,19913,2251,355,Code,62,88,0,5
+328,,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/models,216,25,1,Markdown,0,1,0,0
+329,Image tasks with IDEFICS,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/idefics,19674,2221,351,Code,24,29,6,11
+330,Text classification,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/sequence_classification,17160,1740,337,Code,62,104,0,6
+331,,https://huggingface.co/docs/transformers/v4.34.0/en/migration,195,25,1,Markdown,0,1,0,0
+332,,https://huggingface.co/docs/transformers/v4.34.0/en/hf.co/models,201,25,1,Markdown,0,1,0,0
+333,,https://huggingface.co/docs/transformers/v4.34.0/en/writing-documentation,219,25,1,Markdown,0,1,0,0
+334,Audio classification,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/audio_classification,12631,1313,285,Code,46,32,0,6
+335,DPT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/dpt,16894,1583,261,Code,8,43,1,19
+336,Automatic speech recognition,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/asr,14885,1550,329,Code,48,33,0,6
+337,Image classification,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/image_classification,19620,2043,465,Code,70,60,1,6
+338,Object detection,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/object_detection,24759,2938,524,Code,44,26,2,6
+339,Semantic segmentation,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/semantic_segmentation,22106,2404,510,Code,66,40,2,6
+340,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/transformerxl,224,25,1,Markdown,0,1,0,0
+341,Token classification,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/token_classification,20209,2093,504,Code,66,84,0,6
+342,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/gpt,204,25,1,Markdown,0,1,0,0
+343,Summarization,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/summarization,23696,2855,347,Code,62,56,0,6
+344,Question answering,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/question_answering,17603,1838,374,Code,58,86,0,6
+345,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vitmae,210,25,1,Markdown,0,1,0,0
+346,,https://huggingface.co/docs/transformers/v4.34.0/en/glossary.html#feed-forward-chunking,203,25,1,Markdown,0,1,0,0
+347,,https://huggingface.co/docs/transformers/v4.34.0/en/examples,193,25,1,Markdown,0,1,0,0
+348,Trajectory Transformer,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/trajectory_transformer,14263,1600,152,Code,4,18,0,7
+349,FSMT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/fsmt#transformers.FSMTConfig,40142,4499,431,Code,8,57,0,17
+350,OPT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/opt,33154,3127,471,Code,20,90,0,29
+351,REALM,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/realm#transformers.RealmConfig,60215,6276,787,Code,16,128,0,33
+352,Vision Encoder Decoder Models,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vision-encoder-decoder#transformers.VisionEncoderDecoderConfig,32153,2763,461,Code,24,79,0,22
+353,RetriBERT,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/retribert#transformers.RetriBertConfig,10605,1053,177,Code,4,31,0,16
+354,SEW-D,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/sew-d#transformers.SEWDConfig,34044,3722,357,Code,8,60,0,14
+355,Speech Encoder Decoder Models,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/speech-encoder-decoder#transformers.SpeechEncoderDecoderConfig,23396,1988,324,Code,18,55,0,16
+356,VisionTextDualEncoder,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/vision-text-dual-encoder#transformers.VisionTextDualEncoderConfig,21924,1962,323,Code,8,55,0,15
+357,BertJapanese,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/bert-japanese#transformers.BertJapaneseTokenizer,5375,590,129,Code,6,12,0,7
+358,CodeLlama,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/code_llama#transformers.CodeLlamaTokenizer,15184,1728,245,Code,10,26,0,14
+359,,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/Deepspeed,222,25,1,Markdown,0,1,0,0
+360,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/model_doc/ctrl#transformers.CTRLModel.forward,227,25,1,Markdown,0,1,0,0
+361,Translation,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/translation,15901,1626,353,Code,62,57,0,6
+362,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/INSERT%20LINK%20TO%20GITHUB%20REPO%20HERE,270,30,1,Markdown,0,1,0,0
+363,Masked language modeling,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/masked_language_modeling,18614,2134,378,Code,62,69,0,5
+364,Multiple choice,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/multiple_choice,17985,1867,411,Code,58,64,0,6
+365,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/blip2,208,25,1,Markdown,0,1,0,0
+366,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/(http://www.robots.ox.ac.uk/~vgg/data/text/),286,25,1,Markdown,0,1,0,0
+367,Monocular depth estimation,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/monocular_depth_estimation,4217,471,108,Code,16,8,3,3
+368,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/Pop2Piano#training,216,25,1,Markdown,0,1,0,0
+369,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/generation_strategies,241,25,1,Markdown,0,1,0,0
+370,,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/question-answering,225,25,1,Markdown,0,1,0,0
+371,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/examples/research_projects/quantization-qdqbert,293,25,1,Markdown,0,1,0,0
+372,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/[https://arxiv.org/abs/2102.03334](https://arxiv.org/abs/2209.14156),340,25,1,Markdown,0,2,0,0
+373,,https://huggingface.co/docs/transformers/v4.34.0/en/main_classes/text_generation.md,241,25,1,Markdown,0,1,0,0
+374,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/data2vec-text,224,25,1,Markdown,0,1,0,0
+375,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/data2vec-audio,226,25,1,Markdown,0,1,0,0
+376,Document Question Answering,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/document_question_answering,23693,2748,432,Code,58,24,1,8
+377,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/data2vec-vision,228,25,1,Markdown,0,1,0,0
+378,Video classification,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/video_classification,19858,2194,465,Code,52,23,2,7
+379,,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/model_doc/vit,216,25,1,Markdown,0,1,0,0
+380,Text to speech,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/text-to-speech,21990,2809,531,Code,86,12,3,12
+381,,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/training#train-a-tensorflow-model-with-keras,205,25,1,Markdown,0,1,0,0
+382,,https://huggingface.co/docs/transformers/v4.34.0/en/model_doc/sequence_classification.md,251,25,1,Markdown,0,1,0,0
+383,Zero-shot image classification,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/zero_shot_image_classification,5071,595,112,Code,16,5,2,2
+384,Zero-shot object detection,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/zero_shot_object_detection,11119,1250,246,Code,30,17,7,4
+385,Image captioning,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/image_captioning,7426,742,231,Code,32,13,2,7
+386,Visual Question Answering,https://huggingface.co/docs/transformers/v4.34.0/en/tasks/visual_question_answering,15813,1932,347,Code,48,21,1,7

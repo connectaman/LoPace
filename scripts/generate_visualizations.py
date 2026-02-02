@@ -7,11 +7,12 @@ import os
 import sys
 import time
 import tracemalloc
+import json
 from pathlib import Path
 from typing import List, Dict, Tuple
 import numpy as np
 import matplotlib
-matplotlib.use('SVG')  # Use SVG backend for vector graphics
+matplotlib.use('Agg')  # Use Agg backend which supports both SVG and PNG
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.patches import Rectangle
@@ -21,6 +22,15 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from lopace import PromptCompressor, CompressionMethod
+
+
+def save_both_formats(output_dir: Path, filename_base: str):
+    """Save figure in both SVG and high-quality PNG formats."""
+    # Save SVG
+    plt.savefig(output_dir / f'{filename_base}.svg', format='svg', bbox_inches='tight', dpi=300)
+    # Save PNG with high quality
+    plt.savefig(output_dir / f'{filename_base}.png', format='png', bbox_inches='tight', dpi=300, facecolor='white')
+    print(f"  Saved: {filename_base}.svg and {filename_base}.png")
 
 
 # Set style for publication-quality plots
@@ -37,7 +47,7 @@ plt.rcParams.update({
     'figure.titlesize': 18,
     'figure.dpi': 300,
     'savefig.dpi': 300,
-    'savefig.format': 'svg',
+    'savefig.format': 'png',  # Default format, but we'll save both
     'svg.fonttype': 'none',  # Editable text in SVG
     'mathtext.default': 'regular',
     'axes.linewidth': 1.2,
@@ -47,125 +57,34 @@ plt.rcParams.update({
 })
 
 
-def generate_test_prompts() -> List[Tuple[str, str]]:
-    """Generate test prompts of various sizes."""
+def load_prompts_from_jsonl(jsonl_path: Path) -> List[Tuple[str, str]]:
+    """Load prompts from JSONL file. Returns list of (title, prompt_text) tuples."""
     prompts = []
     
-    # Small prompts (50-200 chars)
-    small_prompts = [
-        "You are a helpful AI assistant.",
-        "Translate the following text to French.",
-        "Summarize this document in 3 sentences.",
-        "You are an expert Python developer.",
-    ]
+    if not jsonl_path.exists():
+        raise FileNotFoundError(f"JSONL file not found: {jsonl_path}")
     
-    # Medium prompts (500-2000 chars)
-    medium_prompts = [
-        """You are a helpful AI assistant designed to provide accurate, 
-detailed, and helpful responses to user queries. Your goal is to assist users 
-by understanding their questions and providing relevant information, explanations, 
-or guidance. Always be respectful, clear, and concise in your communications. 
-If you are uncertain about something, it's better to acknowledge that uncertainty 
-rather than provide potentially incorrect information.""",
-        
-        """As an advanced language model, your primary function is to understand 
-and respond to user inputs in a helpful, accurate, and safe manner. You should 
-provide informative answers, assist with problem-solving, engage in creative 
-writing tasks, and support various learning activities. Maintain objectivity, 
-cite sources when appropriate, and always prioritize user safety and ethical 
-considerations in your responses.""",
-        
-        """You are a professional software engineer with expertise in multiple 
-programming languages including Python, JavaScript, Java, and C++. Your role 
-is to help users write clean, efficient, and maintainable code. Provide 
-code examples, explain best practices, debug issues, and suggest improvements. 
-Always consider performance, security, and scalability in your recommendations.""",
-    ]
+    print(f"Loading prompts from: {jsonl_path}")
     
-    # Large prompts (5000-20000 chars)
-    large_prompts = [
-        """You are a comprehensive AI assistant specializing in technical documentation 
-and educational content. Your expertise spans multiple domains including computer science, 
-data science, machine learning, software engineering, and web development. When responding 
-to queries, you should provide thorough explanations, include relevant examples, and 
-structure your responses in a clear and organized manner. Always aim to educate while 
-solving problems. Break down complex concepts into digestible parts, use analogies when 
-helpful, and provide practical applications of theoretical knowledge. Maintain accuracy 
-by acknowledging when you're uncertain and suggest reliable sources for further learning. 
-Your communication style should be professional yet accessible, avoiding unnecessary 
-jargon while ensuring precision in technical details. Consider the user's background 
-and adjust your explanation depth accordingly. For code-related queries, always provide 
-complete, working examples with comments explaining key parts. For conceptual questions, 
-use diagrams, step-by-step breakdowns, and real-world analogies. When discussing 
-best practices, explain not just what to do but why, including trade-offs and 
-alternative approaches. Your goal is to empower users with knowledge and skills 
-rather than just providing answers. Encourage critical thinking, experimentation, 
-and continuous learning. Address potential pitfalls, common mistakes, and how to 
-avoid them. Provide context about industry standards and emerging trends when relevant. 
-Remember that effective teaching involves understanding the learner's perspective, 
-patience, and encouragement. Always prioritize clarity, accuracy, and educational value 
-in every interaction. Balance thoroughness with conciseness, ensuring responses are 
-comprehensive yet not overwhelming. Use formatting effectively to improve readability, 
-including bullet points, numbered lists, and section headers when appropriate.""",
-        
-        """System Prompt for Advanced Multi-Modal AI Assistant: This AI system is designed 
-to be a versatile, intelligent, and highly capable assistant that can handle a wide range 
-of tasks across multiple domains. The system integrates natural language processing, 
-reasoning capabilities, knowledge retrieval, and contextual understanding to provide 
-comprehensive support. Primary capabilities include question answering, problem-solving, 
-creative tasks, analysis, code generation, data interpretation, and educational support. 
-The assistant maintains a knowledge base spanning science, technology, humanities, 
-business, arts, and current events. When interacting with users, the system should 
-prioritize accuracy, helpfulness, safety, and ethical considerations. Responses should 
-be well-structured, clear, and appropriately detailed based on the complexity of the query. 
-The assistant should ask clarifying questions when necessary, acknowledge limitations, 
-and provide sources or references when making factual claims. For technical questions, 
-provide detailed explanations with examples. For creative tasks, demonstrate imagination 
-while maintaining coherence and appropriateness. For analytical tasks, show step-by-step 
-reasoning and present conclusions clearly. The system should adapt its communication style 
-to match the user's level of expertise and the context of the conversation. Always aim 
-to be constructive, respectful, and professional. When dealing with sensitive topics, 
-exercise caution and provide balanced perspectives. For coding tasks, write clean, 
-well-commented code following best practices. For writing tasks, ensure proper grammar, 
-style, and structure. The assistant should continuously learn from interactions while 
-maintaining core principles and guidelines. It should handle ambiguity gracefully, 
-provide multiple perspectives when appropriate, and help users think critically about 
-complex issues. The system is designed to be a tool for empowerment, education, and 
-efficient problem-solving.""",
-    ]
+    with open(jsonl_path, 'r', encoding='utf-8') as f:
+        for line_num, line in enumerate(f, 1):
+            if not line.strip():
+                continue
+            
+            try:
+                data = json.loads(line)
+                # Extract markdown content (the actual prompt text)
+                markdown = data.get('markdown', '')
+                title = data.get('title', f'Prompt {line_num}')
+                
+                # Use markdown as the prompt text
+                if markdown and len(markdown.strip()) > 0:
+                    prompts.append((title, markdown))
+            except json.JSONDecodeError as e:
+                print(f"Warning: Skipping invalid JSON on line {line_num}: {e}")
+                continue
     
-    # Combine and label prompts
-    for prompt in small_prompts:
-        prompts.append(("Small", prompt))
-    
-    for prompt in medium_prompts:
-        prompts.append(("Medium", prompt))
-    
-    for large_prompts_list in large_prompts:
-        prompts.append(("Large", large_prompts_list))
-    
-    # Add one more large prompt if needed
-    if len(prompts) < 10:
-        additional_large = """Comprehensive System Prompt for Advanced AI Assistant: This sophisticated 
-artificial intelligence system represents a state-of-the-art language model designed to excel across 
-a multitude of domains and applications. The system integrates deep learning architectures, extensive 
-knowledge bases, and advanced reasoning capabilities to provide exceptional assistance. Core competencies 
-include natural language understanding and generation, logical reasoning, creative problem-solving, 
-technical expertise, and ethical decision-making. The assistant maintains extensive knowledge spanning 
-STEM fields, humanities, arts, business, law, medicine, and contemporary issues. When engaging with users, 
-the system employs sophisticated contextual understanding, adapts communication styles appropriately, 
-and provides nuanced, well-reasoned responses. The architecture supports multi-modal interactions, 
-real-time learning, and seamless integration with external tools and databases. Quality assurance 
-mechanisms ensure accuracy, relevance, and safety in all outputs. The system demonstrates exceptional 
-capabilities in code generation and analysis, creative writing, data analysis, educational instruction, 
-research assistance, and complex problem decomposition. Advanced features include meta-cognitive reasoning, 
-uncertainty quantification, bias detection and mitigation, and explainable AI principles. The assistant 
-prioritizes user empowerment through education, transparency, and collaborative problem-solving approaches."""
-        prompts.append(("Large", additional_large))
-    
-    # Ensure we have exactly 10 prompts
-    prompts = prompts[:10]
-    
+    print(f"Loaded {len(prompts)} prompts from JSONL file")
     return prompts
 
 
@@ -223,21 +142,22 @@ def measure_compression(
     return metrics
 
 
-def run_benchmarks() -> pd.DataFrame:
+def run_benchmarks(jsonl_path: Path) -> pd.DataFrame:
     """Run compression benchmarks on all prompts and methods."""
     compressor = PromptCompressor(model="cl100k_base", zstd_level=15)
-    prompts = generate_test_prompts()
+    prompts = load_prompts_from_jsonl(jsonl_path)
     
     all_results = []
     
     print("Running benchmarks...")
-    for idx, (category, prompt) in enumerate(prompts, 1):
-        print(f"  Processing prompt {idx}/10 ({category}, {len(prompt)} chars)...")
+    total_prompts = len(prompts)
+    for idx, (title, prompt) in enumerate(prompts, 1):
+        print(f"  Processing prompt {idx}/{total_prompts} ({len(prompt)} chars)...")
         
         for method in [CompressionMethod.ZSTD, CompressionMethod.TOKEN, CompressionMethod.HYBRID]:
             metrics = measure_compression(compressor, prompt, method)
             metrics['prompt_id'] = idx
-            metrics['prompt_category'] = category
+            metrics['prompt_title'] = title
             metrics['prompt_length'] = len(prompt)
             all_results.append(metrics)
     
@@ -246,10 +166,10 @@ def run_benchmarks() -> pd.DataFrame:
 
 
 def plot_compression_ratio(df: pd.DataFrame, output_dir: Path):
-    """Plot compression ratios by method and prompt size."""
+    """Plot compression ratios by method."""
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
     
-    # Left: Compression ratio by method
+    # Left: Compression ratio by method (boxplot)
     ax1 = axes[0]
     method_order = ['zstd', 'token', 'hybrid']
     method_labels = ['Zstd', 'Token (BPE)', 'Hybrid']
@@ -270,83 +190,71 @@ def plot_compression_ratio(df: pd.DataFrame, output_dir: Path):
     ax1.grid(True, alpha=0.3, linestyle='--')
     ax1.set_ylim(bottom=0)
     
-    # Right: Compression ratio by prompt category
+    # Right: Compression ratio vs prompt length (scatter/line plot)
     ax2 = axes[1]
-    categories = ['Small', 'Medium', 'Large']
-    category_data = []
+    method_order = ['zstd', 'token', 'hybrid']
+    method_labels = ['Zstd', 'Token (BPE)', 'Hybrid']
+    colors = ['#3498db', '#2ecc71', '#9b59b6']
     
-    for category in categories:
-        category_df = df[df['prompt_category'] == category]
-        method_data = [category_df[category_df['method'] == m]['compression_ratio'].mean() 
-                      for m in method_order]
-        category_data.append(method_data)
+    for method, label, color in zip(method_order, method_labels, colors):
+        method_df = df[df['method'] == method]
+        ax2.scatter(method_df['prompt_length'], method_df['compression_ratio'], 
+                   label=label, color=color, alpha=0.6, s=50)
+        
+        # Add trend line
+        if len(method_df) > 1:
+            z = np.polyfit(method_df['prompt_length'], method_df['compression_ratio'], 1)
+            p = np.poly1d(z)
+            sorted_lengths = sorted(method_df['prompt_length'].unique())
+            ax2.plot(sorted_lengths, p(sorted_lengths), color=color, linestyle='--', 
+                    linewidth=2, alpha=0.8)
     
-    x = np.arange(len(categories))
-    width = 0.25
-    
-    for i, (method, color) in enumerate(zip(method_labels, colors)):
-        values = [category_data[j][i] for j in range(len(categories))]
-        ax2.bar(x + i * width, values, width, label=method, color=color, alpha=0.8)
-    
-    ax2.set_ylabel('Mean Compression Ratio', fontweight='bold')
-    ax2.set_xlabel('Prompt Category', fontweight='bold')
-    ax2.set_title('(b) Compression Ratio by Prompt Size', fontweight='bold', pad=15)
-    ax2.set_xticks(x + width)
-    ax2.set_xticklabels(categories)
+    ax2.set_ylabel('Compression Ratio', fontweight='bold')
+    ax2.set_xlabel('Prompt Length (characters)', fontweight='bold')
+    ax2.set_title('(b) Compression Ratio vs Prompt Length', fontweight='bold', pad=15)
     ax2.legend(loc='upper left', framealpha=0.9)
-    ax2.grid(True, alpha=0.3, linestyle='--', axis='y')
+    ax2.grid(True, alpha=0.3, linestyle='--')
     ax2.set_ylim(bottom=0)
+    ax2.set_xscale('log')
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'compression_ratio.svg', format='svg', bbox_inches='tight')
+    save_both_formats(output_dir, 'compression_ratio')
     plt.close()
-    print(f"  Saved: compression_ratio.svg")
 
 
 def plot_space_savings(df: pd.DataFrame, output_dir: Path):
     """Plot space savings percentages."""
     fig, ax = plt.subplots(figsize=(12, 7))
     
-    categories = ['Small', 'Medium', 'Large']
     method_order = ['zstd', 'token', 'hybrid']
     method_labels = ['Zstd', 'Token (BPE)', 'Hybrid']
     colors = ['#3498db', '#2ecc71', '#9b59b6']
     
-    x = np.arange(len(categories))
-    width = 0.25
+    # Create boxplot for space savings by method
+    data_by_method = [df[df['method'] == m]['space_savings_percent'].values for m in method_order]
     
-    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-        means = []
-        stds = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            means.append(subset['space_savings_percent'].mean())
-            stds.append(subset['space_savings_percent'].std())
-        
-        bars = ax.bar(x + i * width, means, width, label=label, color=color, alpha=0.8,
-                     yerr=stds, capsize=5, error_kw={'elinewidth': 2, 'capthick': 2})
+    bp = ax.boxplot(data_by_method, labels=method_labels, patch_artist=True,
+                    widths=0.6, showmeans=True, meanline=True)
+    
+    for patch, color in zip(bp['boxes'], colors):
+        patch.set_facecolor(color)
+        patch.set_alpha(0.7)
     
     ax.set_ylabel('Space Savings (%)', fontweight='bold')
-    ax.set_xlabel('Prompt Category', fontweight='bold')
-    ax.set_title('Space Savings by Compression Method and Prompt Size', fontweight='bold', pad=15)
-    ax.set_xticks(x + width)
-    ax.set_xticklabels(categories)
-    ax.legend(loc='upper left', framealpha=0.9, ncol=3)
+    ax.set_xlabel('Compression Method', fontweight='bold')
+    ax.set_title('Space Savings by Compression Method', fontweight='bold', pad=15)
     ax.grid(True, alpha=0.3, linestyle='--', axis='y')
     ax.set_ylim(0, 100)
     
-    # Add value labels on bars
-    for i, method in enumerate(method_order):
-        for j, category in enumerate(categories):
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            mean_val = subset['space_savings_percent'].mean()
-            ax.text(j + i * width, mean_val + 2, f'{mean_val:.1f}%',
-                   ha='center', va='bottom', fontsize=10, fontweight='bold')
+    # Add mean value annotations
+    for i, (method, label) in enumerate(zip(method_order, method_labels)):
+        mean_val = df[df['method'] == method]['space_savings_percent'].mean()
+        ax.text(i + 1, mean_val + 3, f'Mean: {mean_val:.1f}%',
+               ha='center', va='bottom', fontsize=11, fontweight='bold', color=colors[i])
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'space_savings.svg', format='svg', bbox_inches='tight')
+    save_both_formats(output_dir, 'space_savings')
     plt.close()
-    print(f"  Saved: space_savings.svg")
 
 
 def plot_disk_size_comparison(df: pd.DataFrame, output_dir: Path):
@@ -357,68 +265,63 @@ def plot_disk_size_comparison(df: pd.DataFrame, output_dir: Path):
     method_labels = ['Zstd', 'Token (BPE)', 'Hybrid']
     colors = ['#3498db', '#2ecc71', '#9b59b6']
     
-    # Top: Stacked bar chart showing original vs compressed
+    # Top: Scatter plot showing original vs compressed sizes
     ax1 = axes[0]
-    categories = ['Small', 'Medium', 'Large']
     
-    x = np.arange(len(categories))
+    # Get unique prompts (by prompt_id)
+    unique_prompts = df.groupby('prompt_id').first()
+    original_sizes = unique_prompts['original_size_bytes'].values / 1024  # KB
+    
+    x_pos = np.arange(len(unique_prompts))
     width = 0.25
     
-    for category_idx, category in enumerate(categories):
-        category_df = df[df['prompt_category'] == category]
-        original_sizes = category_df.groupby('prompt_id')['original_size_bytes'].first().mean()
-        
-        compressed_means = []
-        for method in method_order:
-            method_df = category_df[category_df['method'] == method]
-            compressed_means.append(method_df['compressed_size_bytes'].mean())
-        
-        # Stack bars
-        bottom = 0
-        for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-            if i == 0:
-                # First method: show original vs compressed
-                ax1.bar(category_idx + i * width, original_sizes / 1024, width,
-                       label='Original Size' if category_idx == 0 else '', color='#e74c3c', alpha=0.7)
-                ax1.bar(category_idx + i * width, compressed_means[i] / 1024, width,
-                       bottom=0, label=label if category_idx == 0 else '', color=color, alpha=0.8)
-            else:
-                # Other methods: just compressed size
-                ax1.bar(category_idx + i * width, compressed_means[i] / 1024, width,
-                       label=label if category_idx == 0 else '', color=color, alpha=0.8)
+    # Plot original size
+    ax1.bar(x_pos - width, original_sizes, width, label='Original Size', 
+           color='#e74c3c', alpha=0.7)
+    
+    # Plot compressed sizes for each method
+    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
+        method_df = df[df['method'] == method].sort_values('prompt_id')
+        compressed_sizes = method_df['compressed_size_bytes'].values / 1024  # KB
+        ax1.bar(x_pos + i * width, compressed_sizes, width, label=label, 
+               color=color, alpha=0.8)
     
     ax1.set_ylabel('Size (KB)', fontweight='bold')
-    ax1.set_xlabel('Prompt Category', fontweight='bold')
+    ax1.set_xlabel('Prompt ID', fontweight='bold')
     ax1.set_title('Disk Size: Original vs Compressed', fontweight='bold', pad=15)
-    ax1.set_xticks(x + width)
-    ax1.set_xticklabels(categories)
+    ax1.set_xticks(x_pos)
+    ax1.set_xticklabels([f'P{i+1}' for i in range(len(unique_prompts))], rotation=45, ha='right')
     ax1.legend(loc='upper left', framealpha=0.9, ncol=4)
     ax1.grid(True, alpha=0.3, linestyle='--', axis='y')
     ax1.set_yscale('log')
     
-    # Bottom: Percentage reduction
+    # Bottom: Space savings distribution
     ax2 = axes[1]
     
-    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-        means = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            means.append(subset['space_savings_percent'].mean())
+    for method, label, color in zip(method_order, method_labels, colors):
+        method_df = df[df['method'] == method]
+        ax2.scatter(method_df['prompt_length'], method_df['space_savings_percent'],
+                   label=label, color=color, alpha=0.6, s=50)
         
-        ax2.plot(categories, means, marker='o', linewidth=2.5, markersize=10,
-                label=label, color=color, markerfacecolor=color, markeredgewidth=2)
+        # Add trend line
+        if len(method_df) > 1:
+            z = np.polyfit(method_df['prompt_length'], method_df['space_savings_percent'], 1)
+            p = np.poly1d(z)
+            sorted_lengths = sorted(method_df['prompt_length'].unique())
+            ax2.plot(sorted_lengths, p(sorted_lengths), color=color, linestyle='--', 
+                    linewidth=2, alpha=0.8)
     
-    ax2.set_ylabel('Size Reduction (%)', fontweight='bold')
-    ax2.set_xlabel('Prompt Category', fontweight='bold')
-    ax2.set_title('Size Reduction by Prompt Category', fontweight='bold', pad=15)
+    ax2.set_ylabel('Space Savings (%)', fontweight='bold')
+    ax2.set_xlabel('Prompt Length (characters)', fontweight='bold')
+    ax2.set_title('Space Savings vs Prompt Length', fontweight='bold', pad=15)
     ax2.legend(loc='best', framealpha=0.9)
     ax2.grid(True, alpha=0.3, linestyle='--')
     ax2.set_ylim(0, 100)
+    ax2.set_xscale('log')
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'disk_size_comparison.svg', format='svg', bbox_inches='tight')
+    save_both_formats(output_dir, 'disk_size_comparison')
     plt.close()
-    print(f"  Saved: disk_size_comparison.svg")
 
 
 def plot_speed_metrics(df: pd.DataFrame, output_dir: Path):
@@ -428,89 +331,102 @@ def plot_speed_metrics(df: pd.DataFrame, output_dir: Path):
     method_order = ['zstd', 'token', 'hybrid']
     method_labels = ['Zstd', 'Token (BPE)', 'Hybrid']
     colors = ['#3498db', '#2ecc71', '#9b59b6']
-    categories = ['Small', 'Medium', 'Large']
     
-    # Top-left: Compression time
+    # Top-left: Compression time vs prompt length
     ax1 = axes[0, 0]
-    x = np.arange(len(categories))
-    width = 0.25
-    
-    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-        means = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            means.append(subset['compression_time_ms'].mean())
+    for method, label, color in zip(method_order, method_labels, colors):
+        method_df = df[df['method'] == method]
+        ax1.scatter(method_df['prompt_length'], method_df['compression_time_ms'],
+                   label=label, color=color, alpha=0.6, s=50)
         
-        ax1.bar(x + i * width, means, width, label=label, color=color, alpha=0.8)
+        # Add trend line
+        if len(method_df) > 1:
+            z = np.polyfit(method_df['prompt_length'], method_df['compression_time_ms'], 1)
+            p = np.poly1d(z)
+            sorted_lengths = sorted(method_df['prompt_length'].unique())
+            ax1.plot(sorted_lengths, p(sorted_lengths), color=color, linestyle='--', 
+                    linewidth=2, alpha=0.8)
     
     ax1.set_ylabel('Compression Time (ms)', fontweight='bold')
-    ax1.set_xlabel('Prompt Category', fontweight='bold')
-    ax1.set_title('(a) Compression Time', fontweight='bold', pad=15)
-    ax1.set_xticks(x + width)
-    ax1.set_xticklabels(categories)
+    ax1.set_xlabel('Prompt Length (characters)', fontweight='bold')
+    ax1.set_title('(a) Compression Time vs Prompt Length', fontweight='bold', pad=15)
     ax1.legend(framealpha=0.9)
-    ax1.grid(True, alpha=0.3, linestyle='--', axis='y')
+    ax1.grid(True, alpha=0.3, linestyle='--')
     ax1.set_yscale('log')
+    ax1.set_xscale('log')
     
-    # Top-right: Decompression time
+    # Top-right: Decompression time vs prompt length
     ax2 = axes[0, 1]
-    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-        means = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            means.append(subset['decompression_time_ms'].mean())
+    for method, label, color in zip(method_order, method_labels, colors):
+        method_df = df[df['method'] == method]
+        ax2.scatter(method_df['prompt_length'], method_df['decompression_time_ms'],
+                   label=label, color=color, alpha=0.6, s=50)
         
-        ax2.bar(x + i * width, means, width, label=label, color=color, alpha=0.8)
+        # Add trend line
+        if len(method_df) > 1:
+            z = np.polyfit(method_df['prompt_length'], method_df['decompression_time_ms'], 1)
+            p = np.poly1d(z)
+            sorted_lengths = sorted(method_df['prompt_length'].unique())
+            ax2.plot(sorted_lengths, p(sorted_lengths), color=color, linestyle='--', 
+                    linewidth=2, alpha=0.8)
     
     ax2.set_ylabel('Decompression Time (ms)', fontweight='bold')
-    ax2.set_xlabel('Prompt Category', fontweight='bold')
-    ax2.set_title('(b) Decompression Time', fontweight='bold', pad=15)
-    ax2.set_xticks(x + width)
-    ax2.set_xticklabels(categories)
+    ax2.set_xlabel('Prompt Length (characters)', fontweight='bold')
+    ax2.set_title('(b) Decompression Time vs Prompt Length', fontweight='bold', pad=15)
     ax2.legend(framealpha=0.9)
-    ax2.grid(True, alpha=0.3, linestyle='--', axis='y')
+    ax2.grid(True, alpha=0.3, linestyle='--')
     ax2.set_yscale('log')
+    ax2.set_xscale('log')
     
-    # Bottom-left: Compression throughput
+    # Bottom-left: Compression throughput vs prompt length
     ax3 = axes[1, 0]
-    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-        means = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            means.append(subset['compression_throughput_mbps'].mean())
+    for method, label, color in zip(method_order, method_labels, colors):
+        method_df = df[df['method'] == method]
+        ax3.scatter(method_df['prompt_length'], method_df['compression_throughput_mbps'],
+                   label=label, color=color, alpha=0.6, s=50)
         
-        ax3.plot(categories, means, marker='o', linewidth=2.5, markersize=10,
-                label=label, color=color, markerfacecolor=color, markeredgewidth=2)
+        # Add trend line
+        if len(method_df) > 1:
+            z = np.polyfit(method_df['prompt_length'], method_df['compression_throughput_mbps'], 1)
+            p = np.poly1d(z)
+            sorted_lengths = sorted(method_df['prompt_length'].unique())
+            ax3.plot(sorted_lengths, p(sorted_lengths), color=color, linestyle='--', 
+                    linewidth=2, alpha=0.8)
     
     ax3.set_ylabel('Throughput (MB/s)', fontweight='bold')
-    ax3.set_xlabel('Prompt Category', fontweight='bold')
-    ax3.set_title('(c) Compression Throughput', fontweight='bold', pad=15)
+    ax3.set_xlabel('Prompt Length (characters)', fontweight='bold')
+    ax3.set_title('(c) Compression Throughput vs Prompt Length', fontweight='bold', pad=15)
     ax3.legend(framealpha=0.9)
     ax3.grid(True, alpha=0.3, linestyle='--')
     ax3.set_ylim(bottom=0)
+    ax3.set_xscale('log')
     
-    # Bottom-right: Decompression throughput
+    # Bottom-right: Decompression throughput vs prompt length
     ax4 = axes[1, 1]
-    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-        means = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            means.append(subset['decompression_throughput_mbps'].mean())
+    for method, label, color in zip(method_order, method_labels, colors):
+        method_df = df[df['method'] == method]
+        ax4.scatter(method_df['prompt_length'], method_df['decompression_throughput_mbps'],
+                   label=label, color=color, alpha=0.6, s=50)
         
-        ax4.plot(categories, means, marker='s', linewidth=2.5, markersize=10,
-                label=label, color=color, markerfacecolor=color, markeredgewidth=2)
+        # Add trend line
+        if len(method_df) > 1:
+            z = np.polyfit(method_df['prompt_length'], method_df['decompression_throughput_mbps'], 1)
+            p = np.poly1d(z)
+            sorted_lengths = sorted(method_df['prompt_length'].unique())
+            ax4.plot(sorted_lengths, p(sorted_lengths), color=color, linestyle='--', 
+                    linewidth=2, alpha=0.8)
     
     ax4.set_ylabel('Throughput (MB/s)', fontweight='bold')
-    ax4.set_xlabel('Prompt Category', fontweight='bold')
-    ax4.set_title('(d) Decompression Throughput', fontweight='bold', pad=15)
+    ax4.set_xlabel('Prompt Length (characters)', fontweight='bold')
+    ax4.set_title('(d) Decompression Throughput vs Prompt Length', fontweight='bold', pad=15)
     ax4.legend(framealpha=0.9)
     ax4.grid(True, alpha=0.3, linestyle='--')
     ax4.set_ylim(bottom=0)
+    ax4.set_xscale('log')
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'speed_metrics.svg', format='svg', bbox_inches='tight')
+    save_both_formats(output_dir, 'speed_metrics')
     plt.close()
-    print(f"  Saved: speed_metrics.svg")
 
 
 def plot_memory_usage(df: pd.DataFrame, output_dir: Path):
@@ -520,59 +436,56 @@ def plot_memory_usage(df: pd.DataFrame, output_dir: Path):
     method_order = ['zstd', 'token', 'hybrid']
     method_labels = ['Zstd', 'Token (BPE)', 'Hybrid']
     colors = ['#3498db', '#2ecc71', '#9b59b6']
-    categories = ['Small', 'Medium', 'Large']
     
-    x = np.arange(len(categories))
-    width = 0.25
-    
-    # Left: Compression memory
+    # Left: Compression memory vs prompt length
     ax1 = axes[0]
-    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-        means = []
-        stds = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            means.append(subset['compression_memory_mb'].mean())
-            stds.append(subset['compression_memory_mb'].std())
+    for method, label, color in zip(method_order, method_labels, colors):
+        method_df = df[df['method'] == method]
+        ax1.scatter(method_df['prompt_length'], method_df['compression_memory_mb'],
+                   label=label, color=color, alpha=0.6, s=50)
         
-        ax1.bar(x + i * width, means, width, label=label, color=color, alpha=0.8,
-               yerr=stds, capsize=5, error_kw={'elinewidth': 2, 'capthick': 2})
+        # Add trend line
+        if len(method_df) > 1:
+            z = np.polyfit(method_df['prompt_length'], method_df['compression_memory_mb'], 1)
+            p = np.poly1d(z)
+            sorted_lengths = sorted(method_df['prompt_length'].unique())
+            ax1.plot(sorted_lengths, p(sorted_lengths), color=color, linestyle='--', 
+                    linewidth=2, alpha=0.8)
     
     ax1.set_ylabel('Memory Usage (MB)', fontweight='bold')
-    ax1.set_xlabel('Prompt Category', fontweight='bold')
+    ax1.set_xlabel('Prompt Length (characters)', fontweight='bold')
     ax1.set_title('(a) Compression Memory Usage', fontweight='bold', pad=15)
-    ax1.set_xticks(x + width)
-    ax1.set_xticklabels(categories)
     ax1.legend(framealpha=0.9)
-    ax1.grid(True, alpha=0.3, linestyle='--', axis='y')
+    ax1.grid(True, alpha=0.3, linestyle='--')
     ax1.set_ylim(bottom=0)
+    ax1.set_xscale('log')
     
-    # Right: Decompression memory
+    # Right: Decompression memory vs prompt length
     ax2 = axes[1]
-    for i, (method, label, color) in enumerate(zip(method_order, method_labels, colors)):
-        means = []
-        stds = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            means.append(subset['decompression_memory_mb'].mean())
-            stds.append(subset['decompression_memory_mb'].std())
+    for method, label, color in zip(method_order, method_labels, colors):
+        method_df = df[df['method'] == method]
+        ax2.scatter(method_df['prompt_length'], method_df['decompression_memory_mb'],
+                   label=label, color=color, alpha=0.6, s=50)
         
-        ax2.bar(x + i * width, means, width, label=label, color=color, alpha=0.8,
-               yerr=stds, capsize=5, error_kw={'elinewidth': 2, 'capthick': 2})
+        # Add trend line
+        if len(method_df) > 1:
+            z = np.polyfit(method_df['prompt_length'], method_df['decompression_memory_mb'], 1)
+            p = np.poly1d(z)
+            sorted_lengths = sorted(method_df['prompt_length'].unique())
+            ax2.plot(sorted_lengths, p(sorted_lengths), color=color, linestyle='--', 
+                    linewidth=2, alpha=0.8)
     
     ax2.set_ylabel('Memory Usage (MB)', fontweight='bold')
-    ax2.set_xlabel('Prompt Category', fontweight='bold')
+    ax2.set_xlabel('Prompt Length (characters)', fontweight='bold')
     ax2.set_title('(b) Decompression Memory Usage', fontweight='bold', pad=15)
-    ax2.set_xticks(x + width)
-    ax2.set_xticklabels(categories)
     ax2.legend(framealpha=0.9)
-    ax2.grid(True, alpha=0.3, linestyle='--', axis='y')
+    ax2.grid(True, alpha=0.3, linestyle='--')
     ax2.set_ylim(bottom=0)
+    ax2.set_xscale('log')
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'memory_usage.svg', format='svg', bbox_inches='tight')
+    save_both_formats(output_dir, 'memory_usage')
     plt.close()
-    print(f"  Saved: memory_usage.svg")
 
 
 def plot_comprehensive_comparison(df: pd.DataFrame, output_dir: Path):
@@ -581,117 +494,104 @@ def plot_comprehensive_comparison(df: pd.DataFrame, output_dir: Path):
     
     method_order = ['zstd', 'token', 'hybrid']
     method_labels = ['Zstd', 'Token\n(BPE)', 'Hybrid']
-    categories = ['Small', 'Medium', 'Large']
     
-    # Top-left: Compression ratio heatmap
+    # Top-left: Compression ratio by method (boxplot data as heatmap)
     ax1 = axes[0, 0]
-    compression_ratio_matrix = []
+    compression_ratio_data = []
     for method in method_order:
-        row = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            row.append(subset['compression_ratio'].mean())
-        compression_ratio_matrix.append(row)
+        method_df = df[df['method'] == method]
+        compression_ratio_data.append([method_df['compression_ratio'].mean()])
     
+    # Create a single column heatmap
+    compression_ratio_matrix = np.array(compression_ratio_data)
     im1 = ax1.imshow(compression_ratio_matrix, cmap='YlOrRd', aspect='auto', vmin=0)
-    ax1.set_xticks(np.arange(len(categories)))
+    ax1.set_xticks([0])
     ax1.set_yticks(np.arange(len(method_labels)))
-    ax1.set_xticklabels(categories)
+    ax1.set_xticklabels(['All Prompts'])
     ax1.set_yticklabels(method_labels)
     ax1.set_ylabel('Compression Method', fontweight='bold')
-    ax1.set_xlabel('Prompt Category', fontweight='bold')
-    ax1.set_title('(a) Compression Ratio', fontweight='bold', pad=15)
+    ax1.set_xlabel('', fontweight='bold')
+    ax1.set_title('(a) Mean Compression Ratio', fontweight='bold', pad=15)
     
     # Add text annotations
     for i in range(len(method_labels)):
-        for j in range(len(categories)):
-            text = ax1.text(j, i, f'{compression_ratio_matrix[i][j]:.2f}x',
-                          ha="center", va="center", color="black", fontweight='bold')
+        text = ax1.text(0, i, f'{compression_ratio_matrix[i][0]:.2f}x',
+                       ha="center", va="center", color="black", fontweight='bold', fontsize=12)
     
     plt.colorbar(im1, ax=ax1, label='Compression Ratio')
     
-    # Top-right: Space savings heatmap
+    # Top-right: Space savings by method
     ax2 = axes[0, 1]
-    space_savings_matrix = []
+    space_savings_data = []
     for method in method_order:
-        row = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            row.append(subset['space_savings_percent'].mean())
-        space_savings_matrix.append(row)
+        method_df = df[df['method'] == method]
+        space_savings_data.append([method_df['space_savings_percent'].mean()])
     
+    space_savings_matrix = np.array(space_savings_data)
     im2 = ax2.imshow(space_savings_matrix, cmap='RdYlGn', aspect='auto', vmin=0, vmax=100)
-    ax2.set_xticks(np.arange(len(categories)))
+    ax2.set_xticks([0])
     ax2.set_yticks(np.arange(len(method_labels)))
-    ax2.set_xticklabels(categories)
+    ax2.set_xticklabels(['All Prompts'])
     ax2.set_yticklabels(method_labels)
     ax2.set_ylabel('Compression Method', fontweight='bold')
-    ax2.set_xlabel('Prompt Category', fontweight='bold')
-    ax2.set_title('(b) Space Savings (%)', fontweight='bold', pad=15)
+    ax2.set_xlabel('', fontweight='bold')
+    ax2.set_title('(b) Mean Space Savings (%)', fontweight='bold', pad=15)
     
     for i in range(len(method_labels)):
-        for j in range(len(categories)):
-            text = ax2.text(j, i, f'{space_savings_matrix[i][j]:.1f}%',
-                          ha="center", va="center", color="black", fontweight='bold')
+        text = ax2.text(0, i, f'{space_savings_matrix[i][0]:.1f}%',
+                       ha="center", va="center", color="black", fontweight='bold', fontsize=12)
     
     plt.colorbar(im2, ax=ax2, label='Space Savings (%)')
     
-    # Bottom-left: Compression speed heatmap
+    # Bottom-left: Compression throughput by method
     ax3 = axes[1, 0]
-    speed_matrix = []
+    speed_data = []
     for method in method_order:
-        row = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            row.append(subset['compression_throughput_mbps'].mean())
-        speed_matrix.append(row)
+        method_df = df[df['method'] == method]
+        speed_data.append([method_df['compression_throughput_mbps'].mean()])
     
+    speed_matrix = np.array(speed_data)
     im3 = ax3.imshow(speed_matrix, cmap='viridis', aspect='auto')
-    ax3.set_xticks(np.arange(len(categories)))
+    ax3.set_xticks([0])
     ax3.set_yticks(np.arange(len(method_labels)))
-    ax3.set_xticklabels(categories)
+    ax3.set_xticklabels(['All Prompts'])
     ax3.set_yticklabels(method_labels)
     ax3.set_ylabel('Compression Method', fontweight='bold')
-    ax3.set_xlabel('Prompt Category', fontweight='bold')
-    ax3.set_title('(c) Compression Throughput (MB/s)', fontweight='bold', pad=15)
+    ax3.set_xlabel('', fontweight='bold')
+    ax3.set_title('(c) Mean Compression Throughput (MB/s)', fontweight='bold', pad=15)
     
     for i in range(len(method_labels)):
-        for j in range(len(categories)):
-            text = ax3.text(j, i, f'{speed_matrix[i][j]:.2f}',
-                          ha="center", va="center", color="white", fontweight='bold')
+        text = ax3.text(0, i, f'{speed_matrix[i][0]:.2f}',
+                       ha="center", va="center", color="white", fontweight='bold', fontsize=12)
     
     plt.colorbar(im3, ax=ax3, label='Throughput (MB/s)')
     
-    # Bottom-right: Memory usage heatmap
+    # Bottom-right: Memory usage by method
     ax4 = axes[1, 1]
-    memory_matrix = []
+    memory_data = []
     for method in method_order:
-        row = []
-        for category in categories:
-            subset = df[(df['method'] == method) & (df['prompt_category'] == category)]
-            row.append(subset['compression_memory_mb'].mean())
-        memory_matrix.append(row)
+        method_df = df[df['method'] == method]
+        memory_data.append([method_df['compression_memory_mb'].mean()])
     
+    memory_matrix = np.array(memory_data)
     im4 = ax4.imshow(memory_matrix, cmap='plasma', aspect='auto')
-    ax4.set_xticks(np.arange(len(categories)))
+    ax4.set_xticks([0])
     ax4.set_yticks(np.arange(len(method_labels)))
-    ax4.set_xticklabels(categories)
+    ax4.set_xticklabels(['All Prompts'])
     ax4.set_yticklabels(method_labels)
     ax4.set_ylabel('Compression Method', fontweight='bold')
-    ax4.set_xlabel('Prompt Category', fontweight='bold')
-    ax4.set_title('(d) Compression Memory Usage (MB)', fontweight='bold', pad=15)
+    ax4.set_xlabel('', fontweight='bold')
+    ax4.set_title('(d) Mean Compression Memory Usage (MB)', fontweight='bold', pad=15)
     
     for i in range(len(method_labels)):
-        for j in range(len(categories)):
-            text = ax4.text(j, i, f'{memory_matrix[i][j]:.2f}',
-                          ha="center", va="center", color="white", fontweight='bold')
+        text = ax4.text(0, i, f'{memory_matrix[i][0]:.2f}',
+                       ha="center", va="center", color="white", fontweight='bold', fontsize=12)
     
     plt.colorbar(im4, ax=ax4, label='Memory (MB)')
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'comprehensive_comparison.svg', format='svg', bbox_inches='tight')
+    save_both_formats(output_dir, 'comprehensive_comparison')
     plt.close()
-    print(f"  Saved: comprehensive_comparison.svg")
 
 
 def plot_scalability(df: pd.DataFrame, output_dir: Path):
@@ -791,24 +691,18 @@ def plot_scalability(df: pd.DataFrame, output_dir: Path):
     ax4.set_xscale('log')
     
     plt.tight_layout()
-    plt.savefig(output_dir / 'scalability_analysis.svg', format='svg', bbox_inches='tight')
+    save_both_formats(output_dir, 'scalability_analysis')
     plt.close()
-    print(f"  Saved: scalability_analysis.svg")
 
 
-def plot_original_vs_decompressed(output_dir: Path):
+def plot_original_vs_decompressed(jsonl_path: Path, output_dir: Path):
     """Plot original vs decompressed data comparison across multiple prompts."""
     compressor = PromptCompressor(model="cl100k_base", zstd_level=15)
-    prompts = generate_test_prompts()
+    prompts = load_prompts_from_jsonl(jsonl_path)
     
-    # Select a few diverse prompts for visualization
-    selected_prompts = [
-        ("Small Prompt 1", prompts[0][1]),
-        ("Medium Prompt 1", prompts[4][1]),
-        ("Large Prompt 1", prompts[7][1]),
-        ("Medium Prompt 2", prompts[5][1]),
-        ("Small Prompt 2", prompts[1][1]),
-    ]
+    # Select a diverse sample of prompts for visualization (up to 5)
+    num_to_show = min(5, len(prompts))
+    selected_prompts = prompts[:num_to_show]
     
     # Use Hybrid method (best compression)
     method = CompressionMethod.HYBRID
@@ -889,9 +783,8 @@ def plot_original_vs_decompressed(output_dir: Path):
             ax.axhspan(-5, 105, alpha=0.05, color='green', zorder=0)
     
     plt.tight_layout(rect=[0, 0, 1, 0.99])
-    plt.savefig(output_dir / 'original_vs_decompressed.svg', format='svg', bbox_inches='tight')
+    save_both_formats(output_dir, 'original_vs_decompressed')
     plt.close()
-    print(f"  Saved: original_vs_decompressed.svg")
 
 
 def main():
@@ -900,15 +793,19 @@ def main():
     output_dir = Path(__file__).parent.parent / 'screenshots'
     output_dir.mkdir(exist_ok=True)
     
+    # JSONL file path
+    jsonl_path = Path(__file__).parent / 'transformers-4-34-0.jsonl'
+    
     print("=" * 70)
     print("LoPace Visualization Generator")
     print("=" * 70)
     print(f"Output directory: {output_dir}")
+    print(f"JSONL file: {jsonl_path}")
     print()
     
     # Run benchmarks
     print("Step 1: Running compression benchmarks...")
-    df = run_benchmarks()
+    df = run_benchmarks(jsonl_path)
     
     # Save raw data
     csv_path = output_dir / 'benchmark_data.csv'
@@ -925,7 +822,7 @@ def main():
     plot_memory_usage(df, output_dir)
     plot_comprehensive_comparison(df, output_dir)
     plot_scalability(df, output_dir)
-    plot_original_vs_decompressed(output_dir)
+    plot_original_vs_decompressed(jsonl_path, output_dir)
     
     print("\n" + "=" * 70)
     print("Visualization generation complete!")

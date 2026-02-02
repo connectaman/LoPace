@@ -126,7 +126,8 @@ class PromptCompressor:
             >>> original = compressor.decompress_token(compressed)
         """
         # Step 1: Convert text to list of token IDs
-        token_ids = list(self.tokenizer.encode(text))  # Ensure it's a list
+        # Allow special tokens to be encoded as normal text (disable the check)
+        token_ids = list(self.tokenizer.encode(text, disallowed_special=()))  # Ensure it's a list
         
         if not token_ids:
             # Empty token list - return just format byte
@@ -221,7 +222,8 @@ class PromptCompressor:
             >>> original = compressor.decompress_hybrid(compressed)
         """
         # Step 1: Tokenize
-        tokens = list(self.tokenizer.encode(text))  # Ensure it's a list
+        # Allow special tokens to be encoded as normal text (disable the check)
+        tokens = list(self.tokenizer.encode(text, disallowed_special=()))  # Ensure it's a list
         
         if not tokens:
             # Empty token list - return compressed empty data
@@ -393,7 +395,7 @@ class PromptCompressor:
         original_size = len(text.encode('utf-8'))
         stats = {
             'original_size_bytes': original_size,
-            'original_size_tokens': len(self.tokenizer.encode(text)),
+            'original_size_tokens': len(self.tokenizer.encode(text, disallowed_special=())),
             'methods': {}
         }
         
