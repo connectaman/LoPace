@@ -13,7 +13,7 @@ def sha256_hex(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def test_method(
+def run_method_validation(
     compressor: PromptCompressor,
     method: CompressionMethod,
     prompts: list[str],
@@ -67,7 +67,7 @@ def main():
     results = []
 
     for name, method in methods:
-        row_count, success, failure = test_method(
+        row_count, success, failure = run_method_validation(
             compressor, method, prompts
         )
 
