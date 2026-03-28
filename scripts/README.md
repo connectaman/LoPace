@@ -79,3 +79,37 @@ Edit `scripts/generate_visualizations.py` to customize:
 - seaborn
 - numpy
 - lopace (installed)
+
+
+# Validation Scripts
+
+This directory also contains scripts for validating the correctness of LoPace
+compression methods.
+
+## validate_compression_methods_hf.py
+
+Validates round-trip integrity (compress → decompress) for all supported
+compression methods using a public Hugging Face dataset.
+
+### What it does
+
+- Tests all compression methods:
+  - Zstd
+  - Token-based
+  - Hybrid
+- Uses the `argilla/prompt-collective` dataset for realistic prompts
+- Verifies lossless compression using SHA-256 hashes
+- Reports:
+  - Total row count
+  - Success count
+  - Failure count
+- Generates:
+  - Console summary table
+
+### Usage
+
+```bash
+pip install -e .
+pip install -r requirements-dev.txt
+python scripts/validate_compression_methods_hf.py
+```

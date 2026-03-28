@@ -3,3 +3,6 @@ pandas>=2.0.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
 numpy>=1.24.0
+# Validation / benchmarking dependencies
+datasets>=2.0.0
+tqdm>=4.65.0
