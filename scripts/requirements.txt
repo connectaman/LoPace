@@ -1,5 +1,5 @@
 # Additional dependencies for visualization script
 pandas>=2.0.0
-matplotlib>=3.7.0
+matplotlib>=3.9.4
 seaborn>=0.12.0
 numpy>=1.24.0
